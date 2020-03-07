@@ -1,0 +1,279 @@
+Text cell <uB9UYPsHYFYY>
+#%% [markdown]
+# Data Visualization
+
+Text cell <UVTHNHhEYSYj>
+#%% [markdown]
+## Import Libraries
+
+Code cell <NdWLfwAEcKJK>
+#%% [code]
+# Import Library for Data Manipulation
+import pandas as pd
+
+Code cell <7H6g1punZZcG>
+#%% [code]
+# Import Libraries for Visualization
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+Text cell <mxHQEGqOYOoz>
+#%% [markdown]
+## Import Data
+
+Code cell <PeKg5U9hdpUb>
+#%% [code]
+# Import Data From an online link (GitHub)
+df = pd.read_csv('https://raw.githubusercontent.com/dianrdn/data/master/suicide_germany2.csv', sep=',',)
+df
+
+Code cell <nkd6N72ZfbwG>
+#%% [code]
+# Prints the Mmount of Rows and Column Numbers
+df.shape
+
+Code cell <fZUCcxhlfmJj>
+#%% [code]
+# Prints Information About a DataFrame
+df.info()
+
+Text cell <UR51hXJMiYdh>
+#%% [markdown]
+## Distribution Plot
+
+Code cell <nDgoq0uPi0mG>
+#%% [code]
+# Set Graph Size
+plt.rcParams['figure.figsize'] = (16, 8)
+
+Code cell <v7pawK0DkDAS>
+#%% [code]
+# Visualize Distribution
+sns.kdeplot(df['suicides_no'])
+plt.xlabel('Number of Suicides')
+plt.ylabel('Probability Density Function / The Likelihood of Outcome')
+plt.title('Number of Suicide Distribution')
+
+Code cell <ArlZQ-4wiWmI>
+#%% [code]
+# Visualize Histogram
+sns.distplot(df['suicides_no'])
+plt.xlabel('Number of Suicides')
+plt.ylabel('Probability Density Function / The Likelihood of Outcome')
+plt.title('Number of Suicide Distribution')
+
+Code cell <air4PeB7jepA>
+#%% [code]
+# Set Number of Category
+sns.distplot(df['suicides_no'], bins=50)
+plt.xlabel('Number of Suicides')
+plt.ylabel('Probability Density Function / The Likelihood of Outcome')
+plt.title('Number of Suicide Distribution')
+
+Text cell <uYHu8yy9iUFQ>
+#%% [markdown]
+## Pair Plot
+
+Code cell <s2yk7AIVkit3>
+#%% [code]
+# Visualize Pair Plot
+sns.pairplot(df)
+
+Code cell <H5goAcLJQPY3>
+#%% [code]
+# Visualize Pair Plot with Colors
+sns.pairplot(df, hue='sex')
+
+Text cell <s5vgGq_uodV7>
+#%% [markdown]
+## Bar Plot
+
+Code cell <TFRRadpuonXb>
+#%% [code]
+# Draw Basic Bar Plot
+sns.barplot(x='generation', y='suicides_no', data=df)
+
+Code cell <vYGJ3fR-pVwO>
+#%% [code]
+# Draw a Set of Vertical Bars with Different Colors based on Sex
+sns.barplot(x='generation', y='suicides_no', hue='sex', data=df)
+
+Code cell <_kA0UTi8psxP>
+#%% [code]
+# Add Error Bars
+sns.barplot(x='generation', y='suicides_no', hue='sex', capsize=.2, data=df)
+
+Code cell <9_ue3cdArZCb>
+#%% [code]
+# Make Different Plot based on Attribute : Sex
+sns.catplot(x='generation', y='suicides_no', hue='sex', capsize=.2, kind='bar', col='sex', data=df)
+
+Text cell <aZ5Tc9mdIsNL>
+#%% [markdown]
+## Line Plot
+
+Code cell <QIZw3FHUu7Cw>
+#%% [code]
+# Draw Basic Line Plot
+sns.lineplot(x='year', y='suicides_no', data=df)
+
+Code cell <CTwkTYiqI3hS>
+#%% [code]
+# Draw Line Plot with Different Colors based on Age
+sns.lineplot(x='year', y='suicides_no', hue='age', palette='hls', data=df)
+
+Code cell <GZxwcdO4JGQf>
+#%% [code]
+# Make Different Plot based on Attribute : Sex
+sns.relplot(x='year', y='suicides_no', hue='age', palette='hls', col='sex', kind='line', data=df)
+
+Text cell <sgDiwGwhiOcY>
+#%% [markdown]
+## Scatter Plot
+
+Code cell <CWmeNua9eh0b>
+#%% [code]
+# Basic Scatterplot
+sns.scatterplot(x='year', y='suicides_no', data= df)
+
+Code cell <bTW9VX8BnORl>
+#%% [code]
+# Show the Groups with Different Colors based on Age
+sns.scatterplot(x='year', y='suicides_no', hue='age', data=df)
+
+Code cell <HBtNkfmtba1S>
+#%% [code]
+# Show the Grouping Variable by Marker Style based on Sex
+sns.scatterplot(x='year', y='suicides_no', hue='age', style='sex', data=df)
+
+Code cell <S3QSBdcl0bD1>
+#%% [code]
+# Apply Different Color Palette
+sns.scatterplot(x='year', y='suicides_no', hue='age', style='sex', palette='hls', data=df)
+
+Code cell <f_cw4Uev0890>
+#%% [code]
+# Set Points Size Proportional to Age
+sns.scatterplot(x='year', y='suicides_no', hue='age', style='sex', palette='hls', size='age', sizes=(20, 200), data=df)
+
+Code cell <RDuZHLm8hSPc>
+#%% [code]
+# Make Different Plot based on Attribute : Sex
+sns.relplot(x='year', y='suicides_no', hue='age', style='sex', palette='hls', size='age', sizes=(20, 200), col='sex', kind='scatter', data=df)
+
+Code cell <d6q-igQyhRAl>
+#%% [code]
+# Make Different Plot based on Attribute : Age
+sns.relplot(x='year', y='suicides_no', hue='age', style='sex', palette='hls', size='age', sizes=(20, 200), col='age', kind='scatter', data=df)
+
+Text cell <HIholpMmUFJX>
+#%% [markdown]
+## Regression Plot
+
+Code cell <DWy9ENw5SZ07>
+#%% [code]
+# Draw Regression Plot
+sns.lmplot(x='year', y='suicides_no', data=df)
+
+Code cell <GehNRIfRUN-p>
+#%% [code]
+# Draw Multiple Regression Plot
+sns.lmplot(x='year', y='suicides_no', hue='sex', data=df)
+
+Text cell <h-NwWpBqmw4j>
+#%% [markdown]
+## Joint Plot
+
+Code cell <W0Zf7gIzmklC>
+#%% [code]
+# Draw Joint Plot
+sns.jointplot(x='year', y='suicides_no', data=df)
+
+Code cell <QnEei5YBvmtg>
+#%% [code]
+# Draw Regression Plot
+sns.jointplot(x='year', y='gdp_for_year', data=df, kind='reg', truncate=False)
+
+Code cell <RtHcfMLemzk4>
+#%% [code]
+# Draw Hexagon Plot
+sns.jointplot(x='year', y='gdp_for_year', kind='hex', data=df)
+
+Code cell <VmTsnY2snm6Q>
+#%% [code]
+# Draw Kernel Density Estimation Plot
+sns.jointplot(x='year', y='gdp_for_year', kind='kde', data=df)
+
+Text cell <KDZ8gc7hrflE>
+#%% [markdown]
+## Box Plot
+
+Code cell <4nRCjxPFr4VF>
+#%% [code]
+# Draw Box Plot
+sns.boxplot(x='year', y='suicides_no', data=df)
+
+Code cell <ocLH80PRsV3h>
+#%% [code]
+# Draw a Set of Box Plot with Different Colors based on Sex
+sns.boxplot(x='year', y='suicides_no', hue='sex', palette='hls', data=df)
+
+Code cell <wv7PtgNls8nQ>
+#%% [code]
+# Make Different Plot based on Attribute : Sex
+sns.catplot(x='year', y='suicides_no', hue='sex', palette='hls', kind='box', col='sex', data=df)
+
+Text cell <aF3KFmT_tzAS>
+#%% [markdown]
+## Boxen Plot
+
+Code cell <6qLvT6o1tzAX>
+#%% [code]
+# Draw Boxen Plot
+sns.boxenplot(x='year', y='suicides_no', data=df)
+
+Code cell <8I0QtrE3tzAd>
+#%% [code]
+# Draw a Set of Boxen Plot with Different Colors based on Sex
+sns.boxenplot(x='year', y='suicides_no', hue='sex', palette='hls', data=df)
+
+Code cell <BemZqPGatzAg>
+#%% [code]
+# Make Different Plot based on Attribute : Sex
+sns.catplot(x='year', y='suicides_no', hue='sex', palette='hls', kind='boxen', col='sex', data=df)
+
+Text cell <sUPwtvc_N_Q2>
+#%% [markdown]
+## Violin Plot
+
+Code cell <KOaRR8ghJ3MS>
+#%% [code]
+# Draw Basic Violin Plot
+sns.violinplot(x='year', y='suicides_no', split=True, data=df)
+
+Code cell <cYC2IohgOFaU>
+#%% [code]
+# with Different Colors based on Sex
+sns.violinplot(x='year', y='suicides_no', hue='sex', palette='hls', split=True, data=df)
+
+Code cell <e5nJ-xSlOqyg>
+#%% [code]
+# Make Different Plot based on Attribute : Sex
+sns.catplot(x='year', y='suicides_no', hue='sex', palette='hls', kind='violin', col='sex', data=df)
+
+Text cell <zFLxgT3CSL_W>
+#%% [markdown]
+## Correlation Map
+
+Code cell <pTWT7M4Zk7U5>
+#%% [code]
+# Select Only Numeric Attribute
+df_num = df.select_dtypes(include=['float64', 'int64'])
+
+Code cell <x2gewwl9OqkM>
+#%% [code]
+# Draw Correlation Map
+sns.clustermap(df_num.corr(), center=0, cmap='vlag', linewidths=.75)
+
+Notebook attributes
+Show table of contents
